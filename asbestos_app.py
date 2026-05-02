@@ -9,6 +9,7 @@ import io
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(page_title="Asbestos Estimator", layout="wide")
+st.image("logo.png", width=200)
 
 # ---------------- SESSION STATE INIT ----------------
 if "line_items" not in st.session_state:
@@ -31,6 +32,7 @@ def generate_pdf(project_info, items, total):
     buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
+	c.drawImage("logo.png", 1*inch, height - 1.5*inch, width=2*inch, preserveAspectRatio=True)
 
     c.setFont("Helvetica-Bold", 16)
     c.drawString(1*inch, height - 1*inch, "ASBESTOS ESTIMATE")
@@ -137,6 +139,7 @@ if st.button("Clear All Items"):
 # ---------------- SIDEBAR ----------------
 with st.sidebar:
     st.header("Additional Costs")
+    st.sidebar.image("logo.png", width=150)
     mob = st.number_input("Mobilization ($)", value=1500)
     disp = st.number_input("Waste Disposal ($)", value=0)
     air = st.number_input("Air Monitoring ($)", value=850)

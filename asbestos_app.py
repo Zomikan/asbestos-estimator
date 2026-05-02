@@ -32,8 +32,7 @@ def generate_pdf(project_info, items, total):
     buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
-
-	c.drawImage("logo.png", 1*inch, height - 1.6*inch, 
+    c.drawImage("logo.png", 1*inch, height - 1.5*inch, 
 	width=2*inch, preserveAspectRatio=True)
 
     c.setFont("Helvetica-Bold", 16)

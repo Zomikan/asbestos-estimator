@@ -29,6 +29,7 @@ MATERIAL_COSTS = {
 
 # ---------------- PDF FUNCTION ----------------
 def generate_pdf(project_info, items, total):
+	
 	buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter

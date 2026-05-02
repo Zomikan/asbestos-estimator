@@ -29,10 +29,10 @@ MATERIAL_COSTS = {
 
 # ---------------- PDF FUNCTION ----------------
 def generate_pdf(project_info, items, total):
-    buffer = io.BytesIO()
+    c.drawImage("logo.png", 1*inch, height - 1.5*inch, width=2*inch, preserveAspectRatio=True)
+	buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
-	c.drawImage("logo.png", 1*inch, height - 1.5*inch, width=2*inch, preserveAspectRatio=True)
 
     c.setFont("Helvetica-Bold", 16)
     c.drawString(1*inch, height - 1*inch, "ASBESTOS ESTIMATE")

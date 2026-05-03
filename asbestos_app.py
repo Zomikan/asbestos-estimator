@@ -118,9 +118,9 @@ for i, item in enumerate(st.session_state["line_items"]):
        with col2:
            new_qty = st.number_input("Qty", value=item["quantity"], key=f"qty_{i}")
        with col3:
-           new_cost = st.number_input("Unit $", value=item["unit_cost"], key=f"cost_{i}")
-       with col4:
            st.write(item["unit"])
+       with col4:
+           new_cost = st.number_input("Unit $", value=item["unit_cost"], key=f"cost_{i}")
        with col5:
            st.write(f"${item['total']:.2f}")
        with col6:

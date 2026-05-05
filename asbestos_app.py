@@ -9,7 +9,6 @@ import io
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(page_title="Asbestos Estimator", layout="wide")
-st.image("logo.png", width=200)
 
 # ---------------- SESSION STATE INIT ----------------
 if "line_items" not in st.session_state:
@@ -32,8 +31,6 @@ def generate_pdf(project_info, items, total):
     buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
-    c.drawImage("logo.png", 1*inch, height - 1.7*inch, 
-	width=2*inch, preserveAspectRatio=True)
 
     c.setFont("Helvetica-Bold", 16)
     c.drawString(1*inch, height - 1*inch, "ASBESTOS ESTIMATE")
@@ -107,36 +104,7 @@ with st.expander("Add Removal Items", expanded=True):
 # ---------------- DATAFRAME ----------------
 df = pd.DataFrame(st.session_state["line_items"]) if st.session_state["line_items"] else pd.DataFrame(columns=["material","quantity","unit","unit_cost","total"])
 
-st.subheader("Items")
-
-header = st.columns([2,1,1,1,1,1])
-header[0].markdown("**Material**")
-header[1].markdown("**Qty**")
-header[2].markdown("**Unit Cost ($)**")
-header[3].markdown("**Unit**")
-header[4].markdown("**Item Cost ($)**")  # 👈 NOVO
-header[5].markdown("**Action**")
-    
-    with col1:
-           st.write(f"**{item['material']}**")
-    with col2:
-           new_qty = st.number_input("Qty", value=item["quantity"], key=f"qty_{i}")
-    with col3:
-           st.write(item["unit"])
-    with col4:
-           new_cost = st.number_input("Unit $", value=item["unit_cost"], key=f"cost_{i}")
-    with col5:
-           st.write(f"${item['total']:.2f}")  # sada je jasno da je Item Cost
-    with col6:
-           if st.button("❌ Delete", key=f"del_{i}"):
-               st.session_state["line_items"].pop(i)
-               st.rerun()
-
-       # Update logic
-       st.session_state["line_items"][i]["quantity"] = new_qty
-       st.session_state["line_items"][i]["unit_cost"] = new_cost
-       st.session_state["line_items"][i]["total"] = new_qty * new_cost
-
+st.dataframe(df, use_container_width=True)
 
 if st.button("Clear All Items"):
     st.session_state["line_items"] = []
@@ -144,7 +112,6 @@ if st.button("Clear All Items"):
 
 # ---------------- SIDEBAR ----------------
 with st.sidebar:
-    st.sidebar.image("logo.png", width=150)
     st.header("Additional Costs")
     mob = st.number_input("Mobilization ($)", value=1500)
     disp = st.number_input("Waste Disposal ($)", value=0)

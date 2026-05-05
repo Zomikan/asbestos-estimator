@@ -109,8 +109,8 @@ st.subheader("Items")
 header = st.columns([2,1,1,1,1,1])
 header[0].markdown("**Material**")
 header[1].markdown("**Qty**")
-header[2].markdown("**Unit Cost ($)**")
-header[3].markdown("**Unit**")
+header[2].markdown("**Unit**")
+header[3].markdown("**Unit Cost ($)**")
 header[4].markdown("**Item Cost ($)**")  # 👈 NOVO
 header[5].markdown("**Action**")
 

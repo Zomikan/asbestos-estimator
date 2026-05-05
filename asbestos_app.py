@@ -45,10 +45,10 @@ def generate_pdf(project_info, items, costs, total):
     c.line(1*inch, height - 1.7*inch, width - 1*inch, height - 1.7*inch)
 
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(1*inch, height - 1.9*inch, "ASBESTOS ESTIMATE")
+    c.drawString(1*inch, height - 2.0*inch, "ASBESTOS ESTIMATE")
 
     c.setFont("Helvetica", 11)
-    y = height - 2.0*inch
+    y = height - 2.2*inch
     c.drawString(1*inch, y, f"Project: {project_info['name']}")
     y -= 0.25*inch
     c.drawString(1*inch, y, f"Customer: {project_info['customer']}")

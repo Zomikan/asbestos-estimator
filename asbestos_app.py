@@ -33,7 +33,7 @@ def generate_pdf(project_info, items, total):
     c = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
     
-    c.drawImage("logo.png", 1*inch, height - 1.7*inch, width=2*inch, 
+    c.drawImage("logo.png", 1*inch, height - 1.5*inch, width=2*inch, 
     preserveAspectRatio=True)
     c.setFont("Helvetica-Bold", 16)
     c.drawString(1*inch, height - 1*inch, "ASBESTOS ESTIMATE")
@@ -59,23 +59,9 @@ def generate_pdf(project_info, items, total):
         c.drawString(1*inch, y, line)
         y -= 0.2*inch
 
-    # --- COST SUMMARY ---
-     y -= 0.4*inch
-     c.setFont("Helvetica-Bold", 12)
-     c.drawString(1*inch, y, "Cost Summary")
-     y -= 0.3*inch
-
-     c.setFont("Helvetica", 10)
-     c.drawString(1*inch, y, f"Labor & Material: ${costs['subtotal']:,.2f}")
-     y -= 0.2*inch
-     c.drawString(1*inch, y, f"Additional Costs: ${costs['additional']:,.2f}")
-     y -= 0.2*inch
-     c.drawString(1*inch, y, f"Markup: ${costs['markup']:,.2f}")
-
-    # TOTAL
-     y -= 0.4*inch
-     c.setFont("Helvetica-Bold", 12)
-     c.drawString(1*inch, y, f"TOTAL: ${total:,.2f}")
+    y -= 0.4*inch
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(1*inch, y, f"TOTAL: ${total:,.2f}")
 
     c.save()
     buffer.seek(0)
@@ -185,13 +171,7 @@ if st.session_state["line_items"]:
 
     # PDF
     project_info = {"name": proj_name, "customer": customer, "address": address}
-    costs = {
-    "subtotal": subtotal,
-    "additional": mob + disp + air + permits,
-    "markup": markup_val
-    }
-
-    pdf = generate_pdf(project_info, st.session_state["line_items"], costs, total)
+    pdf = generate_pdf(project_info, st.session_state["line_items"], total)
 
     st.download_button("Download PDF", pdf, file_name="estimate.pdf")
 

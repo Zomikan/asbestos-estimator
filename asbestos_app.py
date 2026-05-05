@@ -116,18 +116,17 @@ header[2].markdown("**Unit Cost ($)**")
 header[3].markdown("**Unit**")
 header[4].markdown("**Item Cost ($)**")  # 👈 NOVO
 header[5].markdown("**Action**")
-
-       with col1:
+    with col1:
            st.write(f"**{item['material']}**")
-       with col2:
+    with col2:
            new_qty = st.number_input("Qty", value=item["quantity"], key=f"qty_{i}")
-       with col3:
+    with col3:
            st.write(item["unit"])
-       with col4:
+    with col4:
            new_cost = st.number_input("Unit $", value=item["unit_cost"], key=f"cost_{i}")
-       with col5:
+    with col5:
            st.write(f"${item['total']:.2f}")  # sada je jasno da je Item Cost
-       with col6:
+    with col6:
            if st.button("❌ Delete", key=f"del_{i}"):
                st.session_state["line_items"].pop(i)
                st.rerun()

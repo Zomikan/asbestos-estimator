@@ -69,26 +69,26 @@ def generate_pdf(project_info, items, costs, total):
         y -= 0.2*inch
 
      # --- COST SUMMARY ---
-        y -= 0.4*inch
-        c.setFont("Helvetica-Bold", 12)
-        c.drawString(1*inch, y, "Cost Summary")
-        y -= 0.3*inch
+     y -= 0.4*inch
+     c.setFont("Helvetica-Bold", 12)
+     c.drawString(1*inch, y, "Cost Summary")
+     y -= 0.3*inch
 
-        c.setFont("Helvetica", 10)
-        c.drawString(1*inch, y, f"Labor & Material: ${costs['subtotal']:,.2f}")
-        y -= 0.2*inch
-        c.drawString(1*inch, y, f"Additional Costs: ${costs['additional']:,.2f}")
-        y -= 0.2*inch
-        c.drawString(1*inch, y, f"Markup: ${costs['markup']:,.2f}")
+     c.setFont("Helvetica", 10)
+     c.drawString(1*inch, y, f"Labor & Material: ${costs['subtotal']:,.2f}")
+     y -= 0.2*inch
+     c.drawString(1*inch, y, f"Additional Costs: ${costs['additional']:,.2f}")
+     y -= 0.2*inch
+     c.drawString(1*inch, y, f"Markup: ${costs['markup']:,.2f}")
 
      # TOTAL
-        y -= 0.4*inch
-        c.setFont("Helvetica-Bold", 12)
-        c.drawString(1*inch, y, f"TOTAL: ${total:,.2f}")
+     y -= 0.4*inch
+     c.setFont("Helvetica-Bold", 12)
+     c.drawString(1*inch, y, f"TOTAL: ${total:,.2f}")
 
-        c.save()
-        buffer.seek(0)
-        return buffer
+     c.save()
+     buffer.seek(0)
+     return buffer
 
 # ---------------- TITLE ----------------
 st.title("🏗️ Asbestos Abatement Cost Estimator")
@@ -233,3 +233,4 @@ if uploaded_file:
     st.session_state["line_items"] = data["items"]
     st.success("Project loaded successfully!")
     st.rerun()
+	

@@ -109,9 +109,13 @@ df = pd.DataFrame(st.session_state["line_items"]) if st.session_state["line_item
 
 st.subheader("Items")
 
-for i, item in enumerate(st.session_state["line_items"]):
-   with st.container():
-       col1, col2, col3, col4, col5, col6 = st.columns([2,1,1,1,1,1])
+header = st.columns([2,1,1,1,1,1])
+header[0].markdown("**Material**")
+header[1].markdown("**Qty**")
+header[2].markdown("**Unit Cost ($)**")
+header[3].markdown("**Unit**")
+header[4].markdown("**Item Cost ($)**")  # 👈 NOVO
+header[5].markdown("**Action**")
 
        with col1:
            st.write(f"**{item['material']}**")
@@ -121,8 +125,8 @@ for i, item in enumerate(st.session_state["line_items"]):
            st.write(item["unit"])
        with col4:
            new_cost = st.number_input("Unit $", value=item["unit_cost"], key=f"cost_{i}")
-       with col5:
-           st.write(f"${item['total']:.2f}")
+      with col5:
+    st.write(f"${item['total']:.2f}")  # sada je jasno da je Item Cost
        with col6:
            if st.button("❌ Delete", key=f"del_{i}"):
                st.session_state["line_items"].pop(i)

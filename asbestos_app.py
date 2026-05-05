@@ -104,7 +104,31 @@ with st.expander("Add Removal Items", expanded=True):
 # ---------------- DATAFRAME ----------------
 df = pd.DataFrame(st.session_state["line_items"]) if st.session_state["line_items"] else pd.DataFrame(columns=["material","quantity","unit","unit_cost","total"])
 
-st.dataframe(df, use_container_width=True)
+st.subheader("Items")
+
+for i, item in enumerate(st.session_state["line_items"]):
+    with st.container():
+        col1, col2, col3, col4, col5, col6 = st.columns([2,1,1,1,1,1])
+
+        with col1:
+            st.write(f"**{item['material']}**")
+        with col2:
+            new_qty = st.number_input("Qty", value=item["quantity"], key=f"qty_{i}")
+        with col3:
+            new_cost = st.number_input("Unit $", value=item["unit_cost"], key=f"cost_{i}")
+        with col4:
+            st.write(item["unit"])
+        with col5:
+            st.write(f"${item['total']:.2f}")
+        with col6:
+            if st.button("❌ Delete", key=f"del_{i}"):
+                st.session_state["line_items"].pop(i)
+                st.rerun()
+
+        # Update logic
+        st.session_state["line_items"][i]["quantity"] = new_qty
+        st.session_state["line_items"][i]["unit_cost"] = new_cost
+        st.session_state["line_items"][i]["total"] = new_qty * new_cost
 
 if st.button("Clear All Items"):
     st.session_state["line_items"] = []

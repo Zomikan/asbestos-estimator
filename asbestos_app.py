@@ -40,7 +40,7 @@ def generate_pdf(project_info, items, costs, total):
     c.drawString(4.5*inch, height - 1.4*inch, "Email: info@abcremoval.com")
     c.drawString(4.5*inch, height - 1.6*inch, "License #: IL-123456")
      
-    c.drawImage("logo.png", 1*inch, height - 1.7*inch, width=2*inch, 
+    c.drawImage("logo.png", 1*inch, height - 0.7*inch, width=2*inch, 
     preserveAspectRatio=True)
     c.line(1*inch, height - 1.8*inch, width - 1*inch, height - 1.8*inch)
 

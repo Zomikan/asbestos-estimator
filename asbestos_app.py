@@ -28,22 +28,13 @@ MATERIAL_COSTS = {
 }
 
 # ---------------- PDF FUNCTION ----------------
-def generate_pdf(project_info, items, costs, total):
+def generate_pdf(project_info, items, total):
     buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
     
-    # COMPANY INFO
-    c.setFont("Helvetica", 10)
-    c.drawString(4.5*inch, height - 1*inch, "ABC Asbestos Removal LLC")
-    c.drawString(4.5*inch, height - 1.2*inch, "Phone: (312) 555-1234")
-    c.drawString(4.5*inch, height - 1.4*inch, "Email: info@abcremoval.com")
-    c.drawString(4.5*inch, height - 1.6*inch, "License #: IL-123456")
-     
     c.drawImage("logo.png", 1*inch, height - 1.7*inch, width=2*inch, 
     preserveAspectRatio=True)
-    c.line(1*inch, height - 1.8*inch, width - 1*inch, height - 1.8*inch)
-
     c.setFont("Helvetica-Bold", 16)
     c.drawString(1*inch, height - 1*inch, "ASBESTOS ESTIMATE")
 
@@ -68,27 +59,13 @@ def generate_pdf(project_info, items, costs, total):
         c.drawString(1*inch, y, line)
         y -= 0.2*inch
 
-     # --- COST SUMMARY ---
-     y -= 0.4*inch
-     c.setFont("Helvetica-Bold", 12)
-     c.drawString(1*inch, y, "Cost Summary")
-     y -= 0.3*inch
+    y -= 0.4*inch
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(1*inch, y, f"TOTAL: ${total:,.2f}")
 
-     c.setFont("Helvetica", 10)
-     c.drawString(1*inch, y, f"Labor & Material: ${costs['subtotal']:,.2f}")
-     y -= 0.2*inch
-     c.drawString(1*inch, y, f"Additional Costs: ${costs['additional']:,.2f}")
-     y -= 0.2*inch
-     c.drawString(1*inch, y, f"Markup: ${costs['markup']:,.2f}")
-
-     # TOTAL
-     y -= 0.4*inch
-     c.setFont("Helvetica-Bold", 12)
-     c.drawString(1*inch, y, f"TOTAL: ${total:,.2f}")
-
-     c.save()
-     buffer.seek(0)
-     return buffer
+    c.save()
+    buffer.seek(0)
+    return buffer
 
 # ---------------- TITLE ----------------
 st.title("🏗️ Asbestos Abatement Cost Estimator")
@@ -194,13 +171,7 @@ if st.session_state["line_items"]:
 
     # PDF
     project_info = {"name": proj_name, "customer": customer, "address": address}
-    costs = {
-    "subtotal": subtotal,
-    "additional": mob + disp + air + permits,
-    "markup": markup_val
-    }
-
-    pdf = generate_pdf(project_info, st.session_state["line_items"], costs, total)
+    pdf = generate_pdf(project_info, st.session_state["line_items"], total)
 
     st.download_button("Download PDF", pdf, file_name="estimate.pdf")
 

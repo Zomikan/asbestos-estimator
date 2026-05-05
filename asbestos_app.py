@@ -233,3 +233,4 @@ if uploaded_file:
     st.session_state["line_items"] = data["items"]
     st.success("Project loaded successfully!")
     st.rerun()
+	

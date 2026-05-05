@@ -9,6 +9,7 @@ import io
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(page_title="Asbestos Estimator", layout="wide")
+st.image("logo.png", width=200)
 
 # ---------------- SESSION STATE INIT ----------------
 if "line_items" not in st.session_state:

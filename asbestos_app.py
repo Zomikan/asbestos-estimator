@@ -68,7 +68,7 @@ def generate_pdf(project_info, items, costs, total):
         c.drawString(1*inch, y, line)
         y -= 0.2*inch
 
-   # --- COST SUMMARY ---
+     # --- COST SUMMARY ---
      y -= 0.4*inch
      c.setFont("Helvetica-Bold", 12)
      c.drawString(1*inch, y, "Cost Summary")
@@ -81,14 +81,14 @@ def generate_pdf(project_info, items, costs, total):
      y -= 0.2*inch
      c.drawString(1*inch, y, f"Markup: ${costs['markup']:,.2f}")
 
-   # TOTAL
-    y -= 0.4*inch
-    c.setFont("Helvetica-Bold", 12)
-    c.drawString(1*inch, y, f"TOTAL: ${total:,.2f}")
+     # TOTAL
+     y -= 0.4*inch
+     c.setFont("Helvetica-Bold", 12)
+     c.drawString(1*inch, y, f"TOTAL: ${total:,.2f}")
 
-    c.save()
-    buffer.seek(0)
-    return buffer
+     c.save()
+     buffer.seek(0)
+     return buffer
 
 # ---------------- TITLE ----------------
 st.title("🏗️ Asbestos Abatement Cost Estimator")

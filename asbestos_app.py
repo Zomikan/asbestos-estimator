@@ -125,8 +125,8 @@ header[5].markdown("**Action**")
            st.write(item["unit"])
        with col4:
            new_cost = st.number_input("Unit $", value=item["unit_cost"], key=f"cost_{i}")
-      with col5:
-    st.write(f"${item['total']:.2f}")  # sada je jasno da je Item Cost
+       with col5:
+           st.write(f"${item['total']:.2f}")  # sada je jasno da je Item Cost
        with col6:
            if st.button("❌ Delete", key=f"del_{i}"):
                st.session_state["line_items"].pop(i)

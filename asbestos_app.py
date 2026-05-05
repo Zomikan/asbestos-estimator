@@ -145,7 +145,6 @@ if st.button("Clear All Items"):
 
 # ---------------- SIDEBAR ----------------
 with st.sidebar:
-	st.sidebar.image("logo.png", width=150)
     st.header("Additional Costs")
     mob = st.number_input("Mobilization ($)", value=1500)
     disp = st.number_input("Waste Disposal ($)", value=0)
